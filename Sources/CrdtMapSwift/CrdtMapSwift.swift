@@ -304,7 +304,7 @@ public class CrdtMapSwift {
 
             let item = CrdtMapItem(
                 timestamp: Decoding.readFloat64(bytes, &pos),
-                clientId: Decoding.readUint32(bytes, &pos),
+                clientId:  Decoding.readUint32(bytes, &pos),
                 data: hasData ? Decoding.readAny(bytes, &pos) : nil
             )
 

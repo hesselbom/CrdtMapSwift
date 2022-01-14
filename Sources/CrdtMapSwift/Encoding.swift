@@ -64,10 +64,10 @@ struct Encoding {
     }
     
     public static func writeUint32(_ bytes: inout [UInt8], _ num: UInt32) {
-        var _num = num
+        var _num: UInt64 = UInt64(num)
         for _ in 0..<4 {
-            writeVarUint(&bytes, UInt64(_num) & Binary.BITS8)
-            _num = num >> 8
+            writeUint8(&bytes, UInt8(_num & Binary.BITS8))
+            _num = _num >> 8
         }
     }
     

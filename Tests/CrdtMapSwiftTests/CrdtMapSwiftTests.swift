@@ -756,4 +756,14 @@ final class CrdtMapSwiftTests: XCTestCase {
         
         XCTAssert(subMap1 === subMap2)
     }
+    
+    func testIndexOutOfBoundsIssueWhenClientIdIsHigh() throws {
+        let doc = CrdtMapSwift()
+        doc.set("postsync", "postsync", timestamp: 1642170325184.023, clientId: 2869881342)
+        
+        let encoded = CrdtMapSwift.encode(snapshot: doc.getSnapshotFrom(timestamp: 0))
+        let decoded = CrdtMapSwift.decodeSnapshot(encoded)
+        
+        XCTAssertEqual(decoded.count, 1)
+    }
 }
