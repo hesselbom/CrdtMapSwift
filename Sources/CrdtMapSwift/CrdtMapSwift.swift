@@ -212,7 +212,7 @@ public class CrdtMapSwift {
         return dict
     }
     
-    func apply(snapshot: [String: CrdtMapItem]) {
+    public func apply(snapshot: [String: CrdtMapItem]) {
         var appliedSnapshot: [String: CrdtMapItem] = [:]
         for (key, item) in snapshot {
             if set(key, item.data, timestamp: item.timestamp, clientId: item.clientId, emitEvents: false) {
