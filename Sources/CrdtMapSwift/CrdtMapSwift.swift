@@ -1,9 +1,9 @@
 import Foundation
 
 public struct CrdtMapItem {
-    var timestamp: Double
-    var clientId: UInt32
-    var data: Any?
+    public private(set) var timestamp: Double
+    public private(set) var clientId: UInt32
+    public private(set) var data: Any?
 }
 
 public class CrdtMapSubMap {
