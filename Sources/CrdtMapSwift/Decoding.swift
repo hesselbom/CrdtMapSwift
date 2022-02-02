@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Decoding {
+public struct Decoding {
     public static func readUint8(_ bytes: [UInt8], _ pos: inout Int) -> UInt8 {
         pos += 1
         return bytes[pos - 1]
@@ -101,6 +101,15 @@ struct Decoding {
             pos += length
             return String(decoding: bytes[(pos - length)..<pos], as: UTF8.self)
         }
+    }
+    
+    public static func readUint8Array(_ bytes: [UInt8], _ pos: inout Int, length: Int) -> [UInt8] {
+        pos += length
+        return [UInt8](bytes[(pos - length)..<pos])
+    }
+    
+    public static func readVarUint8Array(_ bytes: [UInt8], _ pos: inout Int) -> [UInt8] {
+        return readUint8Array(bytes, &pos, length: Int(readVarUint(bytes, &pos)))
     }
     
     public static func readAny(_ bytes: [UInt8], _ pos: inout Int) -> Any? {

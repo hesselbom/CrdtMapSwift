@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Encoding {
+public struct Encoding {
     public static func writeUint8(_ bytes: inout [UInt8], _ byte: UInt8) {
         bytes.append(byte)
     }
@@ -50,6 +50,16 @@ struct Encoding {
         writeVarUint(&bytes, UInt64(strBytes.count))
         bytes.append(contentsOf: strBytes)
     }
+    
+    //export const writeUint8Array = (encoder, uint8Array) => {
+    public static func writeUint8Array(_ bytes: inout [UInt8], _ uint8Array: [UInt8]) {
+        bytes.append(contentsOf: uint8Array)
+    }
+    
+    public static func writeVarUint8Array(_ bytes: inout [UInt8], _ uint8Array: [UInt8]) {
+        writeVarUint(&bytes, UInt64(uint8Array.count))
+        writeUint8Array(&bytes, uint8Array)
+      }
     
     public static func writeFloat32(_ bytes: inout [UInt8], _ num: Float32) {
         let data: [UInt8] = withUnsafeBytes(of: num.bitPattern.littleEndian, Array.init)
